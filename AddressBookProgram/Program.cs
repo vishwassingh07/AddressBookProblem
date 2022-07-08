@@ -8,7 +8,7 @@ namespace AddressBookProgram
             Console.WriteLine("Welcome To The Address Book Program ");
             AddressBook addressBook = new AddressBook();
             bool end = true;
-            Console.WriteLine("1. Add Contact\n2. End Program");
+            Console.WriteLine("1. Add Contact\n2. Edit Contact\n3. End Program");
             while (end == true)
             {
                 Console.WriteLine("Choose Option To Execute :");
@@ -20,6 +20,11 @@ namespace AddressBookProgram
                         addressBook.ListContact();
                         break;
                     case 2:
+                        addressBook.GetContact();
+                        addressBook.EditContact();
+                        addressBook.ListContact();
+                        break;
+                    case 3:
                         end = false;
                         break;
                     default:
@@ -27,9 +32,6 @@ namespace AddressBookProgram
                         break;
                 }
             }
-            
-
-
         }
     }
 }
