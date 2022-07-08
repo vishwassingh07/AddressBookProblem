@@ -8,61 +8,54 @@ namespace AddressBookProgram
 {
     public interface IAddressBook
     {
-        void GetContact();
+        //void GetContact();
         void ListContact();
         void DeletePeople();
     }
     public class AddressBook : IAddressBook
     {
-        public LinkedList<Person> people;
+        public List<AddressBook> people;
         public AddressBook()
         {
-            people = new LinkedList<Person>();
+            people = new List<AddressBook>();
         }
-        public void GetContact()
+
+        public string firstName;
+        public string lastName;
+        public string address;
+        public string city;
+        public string state;
+        public string zipCode;
+        public string phoneNum;
+        public string emailId;
+        public AddressBook(string firstName, string lastName, string address, string city, string state, string zip, string phoneNumber, string email)
         {
-            Person person = new Person();
-
-            Console.Write("Enter First Name: ");
-            person.FirstName = Console.ReadLine();
-
-            Console.Write("Enter Last Name: ");
-            person.LastName = Console.ReadLine();
-
-            Console.Write("Enter Address : ");
-            person.Addresses = Console.ReadLine();
-
-            Console.Write("Enter City : ");
-            person.City = Console.ReadLine();
-
-            Console.Write("Enter State : ");
-            person.State = Console.ReadLine();
-
-            Console.Write("Enter ZipCode: ");
-            person.ZipCode = Console.ReadLine();
-
-            Console.Write("Enter Phone Number: ");
-            person.PhoneNum = Console.ReadLine();
-
-            Console.Write("Enter EmailId: ");
-            person.EmailId = Console.ReadLine();
-
-            people.AddLast(person);
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.address = address;
+            this.city = city;
+            this.state = state;
+            this.zipCode = zip;
+            this.phoneNum = phoneNumber;
+            this.emailId = email;
         }
-        public void PrintContact(Person person)
+        public void GetCustomer(string firstName, string lastName, string phoneNum, string address, string city, string state, string zipCode, string emailId)
         {
-            Console.WriteLine("First Name: " + person.FirstName);
-            Console.WriteLine("Last Name: " + person.LastName);
-            Console.WriteLine("Phone Number: " + person.PhoneNumber);
-            Console.WriteLine("Address : " + person.Addresses);
-            Console.WriteLine("City : " + person.City);
-            Console.WriteLine("State : " + person.State);
-            Console.WriteLine("ZipCode : " + person.ZipCode);
-            Console.WriteLine("Phone Number: " + person.PhoneNum);
-            Console.WriteLine("EmailId: " + person.EmailId);
-            Console.WriteLine("-----------------------------------------------------------");
-            Console.WriteLine("-----------------------------------------------------------");
+
         }
+        public void PrintContact(AddressBook person)
+        {
+        Console.WriteLine("First Name: " + person.firstName);
+        Console.WriteLine("Last Name: " + person.lastName);
+        Console.WriteLine("Phone Number: " + person.phoneNum);
+        Console.WriteLine("Address : " + person.address);
+        Console.WriteLine("City : " + person.city);
+        Console.WriteLine("State : " + person.state);
+        Console.WriteLine("ZipCode : " + person.zipCode);
+        Console.WriteLine("Phone Number: " + person.phoneNum);
+        Console.WriteLine("Email Id: " + person.emailId);
+        Console.WriteLine("-------------------------------------------");
+    }
         //UC3 - Editing Contact
         public void EditContact()
         {
@@ -72,7 +65,7 @@ namespace AddressBookProgram
                 string Modified = Console.ReadLine();
                 foreach (var person in people)
                 {
-                    if (person.FirstName.ToUpper() == Modified.ToUpper())
+                    if (person.firstName.ToUpper() == Modified.ToUpper())
                     {
                         while (true)
                         {
@@ -90,31 +83,31 @@ namespace AddressBookProgram
                             {
                                 case 1:
                                     Console.WriteLine("Enter the New First Name: ");
-                                    person.FirstName = Console.ReadLine();
+                                    person.firstName = Console.ReadLine();
                                     break;
                                 case 2:
                                     Console.WriteLine("Enter the New Last Name: ");
-                                    person.LastName = Console.ReadLine();
+                                    person.lastName = Console.ReadLine();
                                     break;
                                 case 3:
                                     Console.WriteLine("Enter the New Phone Number: ");
-                                    person.PhoneNum = Console.ReadLine();
+                                    person.phoneNum = Console.ReadLine();
                                     break;
                                 case 4:
                                     Console.WriteLine("Enter the New Address: ");
-                                    person.Addresses = Console.ReadLine();
+                                    person.address = Console.ReadLine();
                                     break;
                                 case 5:
                                     Console.WriteLine("Enter the New City: ");
-                                    person.City = Console.ReadLine();
+                                    person.city = Console.ReadLine();
                                     break;
                                 case 6:
                                     Console.WriteLine("Enter the New State: ");
-                                    person.State = Console.ReadLine();
+                                    person.state = Console.ReadLine();
                                     break;
                                 case 7:
                                     Console.WriteLine("Enter the New Pin Code: ");
-                                    person.ZipCode = Console.ReadLine();
+                                    person.zipCode = Console.ReadLine();
                                     break;
                                 case 8:
                                     return;
@@ -145,8 +138,7 @@ namespace AddressBookProgram
             {
                 PrintContact(person);
             }
-            Console.WriteLine("\nPress any key to continue.");
-            Console.ReadKey();
+            return;
         }
         public void PrintContact(object person)
         {
@@ -156,7 +148,7 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Enter the first name of the person you would like to remove.");
             string firstName = Console.ReadLine();
-            Person person = people.FirstOrDefault(x => x.FirstName.ToUpper() == firstName.ToUpper());
+            AddressBook person = people.FirstOrDefault(x => x.firstName.ToUpper() == firstName.ToUpper());
             if (person == null)
             {
                 Console.WriteLine("That person could not be found..");
