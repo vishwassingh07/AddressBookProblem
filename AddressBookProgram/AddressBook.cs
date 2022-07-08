@@ -53,6 +53,10 @@ namespace AddressBookProgram
             Console.WriteLine("-----------------------------------------------------------");
             Console.WriteLine("-----------------------------------------------------------");
         }
+        public void PrintContact(object person)
+        {
+            throw new NotImplementedException();
+        }
         public void ListContact()
         {
             if (People.Count == 0)
