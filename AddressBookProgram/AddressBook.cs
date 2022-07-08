@@ -46,7 +46,26 @@ namespace AddressBookProgram
         //Getting Details Of User
         public void GetCustomer(string firstName, string lastName, string phoneNum, string address, string city, string state, string zipCode, string emailId)
         {
-
+            AddressBook person = new AddressBook(firstName, lastName, phoneNum, address, city, state, zipCode, emailId);
+            if (people.Count == 0)
+            {
+                people.Add(person);
+            }
+            else
+            {
+                AddressBook people = this.people.Find(a => a.firstName.Equals(firstName));
+                if (people == null)
+                {
+                    AddressBook p = new AddressBook(firstName, lastName, address, city, state, phoneNum, zipCode, emailId);
+                    this.people.Add(p);
+                }
+                else
+                {
+                    Console.WriteLine("-------Record is already exists-------");
+                    Console.WriteLine("Modify the details which has duplicate name");
+                    EditContact();
+                }
+            }
         }
         public void PrintContact(AddressBook person)
         {
