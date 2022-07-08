@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace AddressBookProgram
 {
-    public class AddressBook
+    public interface IAddressBook
     {
-        public List<Person> People = new List<Person>();
+        void GetContact();
+        void ListContact();
+        void DeletePeople();
+    }
+    public class AddressBook : IAddressBook
+    {
+        public LinkedList<Person> people;
+        public AddressBook()
+        {
+            people = new LinkedList<Person>();
+        }
         public void GetContact()
         {
             Person person = new Person();
@@ -37,7 +47,7 @@ namespace AddressBookProgram
             Console.Write("Enter EmailId: ");
             person.EmailId = Console.ReadLine();
 
-            People.Add(person);
+            people.AddLast(person);
         }
         public void PrintContact(Person person)
         {
@@ -56,11 +66,11 @@ namespace AddressBookProgram
         //UC3 - Editing Contact
         public void EditContact()
         {
-            if (People.Count != 0)
+            if (people.Count != 0)
             {
                 Console.WriteLine("Enter the contact to modify:");
                 string Modified = Console.ReadLine();
-                foreach (var person in People)
+                foreach (var person in people)
                 {
                     if (person.FirstName.ToUpper() == Modified.ToUpper())
                     {
@@ -122,43 +132,48 @@ namespace AddressBookProgram
                 }
             }
         }
-        //UC4 - Deleting Contact
-        public void DeletePeople()
-        {
-            Console.WriteLine("Enter the first name of the person you would like to remove.");
-            string Remove = Console.ReadLine();
-            foreach (var person in People.ToList())
-            {
-                if (person.FirstName.ToUpper() == Remove.ToUpper())
-                {
-                    People.Remove(person);
-                    Console.WriteLine("Contact is deleted");
-                }
-                else
-                {
-                    Console.WriteLine("Contact is not present");
-                }
-            }
-        }
-        public void PrintContact(object person)
-        {
-            throw new NotImplementedException();
-        }
         public void ListContact()
         {
-            if (People.Count == 0)
+            if (people.Count == 0)
             {
                 Console.WriteLine("Your address book is empty.");
                 Console.ReadKey();
                 return;
             }
             Console.WriteLine("The Contacts In address book:\n");
-            foreach (var person in People)
+            foreach (var person in people)
             {
                 PrintContact(person);
             }
             Console.WriteLine("\nPress any key to continue.");
             Console.ReadKey();
         }
+        public void PrintContact(object person)
+        {
+            throw new NotImplementedException();
+        }
+        public void DeletePeople()
+        {
+            Console.WriteLine("Enter the first name of the person you would like to remove.");
+            string firstName = Console.ReadLine();
+            Person person = people.FirstOrDefault(x => x.FirstName.ToUpper() == firstName.ToUpper());
+            if (person == null)
+            {
+                Console.WriteLine("That person could not be found..");
+
+                return;
+            }
+            Console.WriteLine("Are you sure you want to remove this person from your address book? (Y/N)");
+            //  PrintContact(person);
+
+            if (Console.ReadKey().Key == ConsoleKey.Y)
+            {
+                people.Remove(person);
+                Console.WriteLine("\nPerson removed ");
+
+            }
+
+        }
+        
     }
 }
