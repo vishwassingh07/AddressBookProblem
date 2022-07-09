@@ -119,23 +119,23 @@ namespace AddressBookProgram
                 {
                     Console.WriteLine("This person already exists in your AddressBook!");
                 }
-            
+
             }
         }
-           
+
         public void PrintContact(AddressBook person)
         {
-        Console.WriteLine("First Name: " + person.firstName);
-        Console.WriteLine("Last Name: " + person.lastName);
-        Console.WriteLine("Phone Number: " + person.phoneNum);
-        Console.WriteLine("Address : " + person.address);
-        Console.WriteLine("City : " + person.city);
-        Console.WriteLine("State : " + person.state);
-        Console.WriteLine("ZipCode : " + person.zipCode);
-        Console.WriteLine("Phone Number: " + person.phoneNum);
-        Console.WriteLine("Email Id: " + person.emailId);
-        Console.WriteLine("-------------------------------------------");
-    }
+            Console.WriteLine("First Name: " + person.firstName);
+            Console.WriteLine("Last Name: " + person.lastName);
+            Console.WriteLine("Phone Number: " + person.phoneNum);
+            Console.WriteLine("Address : " + person.address);
+            Console.WriteLine("City : " + person.city);
+            Console.WriteLine("State : " + person.state);
+            Console.WriteLine("ZipCode : " + person.zipCode);
+            Console.WriteLine("Phone Number: " + person.phoneNum);
+            Console.WriteLine("Email Id: " + person.emailId);
+            Console.WriteLine("-------------------------------------------");
+        }
         //UC3 - Editing Contact
         public void EditContact()
         {
@@ -294,6 +294,7 @@ namespace AddressBookProgram
             }
 
         }
+        //Sorting By Name
         public static void SortByPersonName(Dictionary<string, List<AddressBook>> addressBook)
         {
 
@@ -313,6 +314,68 @@ namespace AddressBookProgram
                 }
             }
         }
+        //Sorting By CityName
+        public static void SortBasedByCity(Dictionary<string, List<AddressBook>> addressBook)
+        {
 
+            SortedList<string, AddressBook> sorted;
+            foreach (KeyValuePair<string, List<AddressBook>> kvp in addressBook)
+            {
+                Console.WriteLine("\n--------Displaying Sorted contact based on city  in address book: {0}-------\n", kvp.Key);
+                sorted = new SortedList<string, AddressBook>();
+                foreach (var member in kvp.Value)
+                {
+                    sorted.Add(member.city, member);
+                }
+                foreach (var member in sorted)
+                {
+                    Console.WriteLine(member.Value.ToString());
+
+                }
+
+            }
+
+        }
+        //Sorting By StateName
+        public static void SortBasedByState(Dictionary<string, List<AddressBook>> addressBook)
+        {
+
+            SortedList<string, AddressBook> sorted;
+            foreach (KeyValuePair<string, List<AddressBook>> kvp in addressBook)
+            {
+                Console.WriteLine("\n--------Displaying Sorted contact based on State  in address book: {0}-------\n", kvp.Key);
+                sorted = new SortedList<string, AddressBook>();
+                foreach (var member in kvp.Value)
+                {
+                    sorted.Add(member.state, member);
+                }
+                foreach (var member in sorted)
+                {
+                    Console.WriteLine(member.Value.ToString());
+
+                }
+
+            }
+        }
+        //Sorting By ZipCode
+        public static void SortBasedByZipCode(Dictionary<string, List<AddressBook>> addressBook)
+        {
+
+            SortedList<string, AddressBook> sorted;
+            foreach (KeyValuePair<string, List<AddressBook>> kvp in addressBook)
+            {
+                Console.WriteLine("\n--------Displaying Sorted contact based on State  in address book: {0}-------\n", kvp.Key);
+                sorted = new SortedList<string, AddressBook>();
+                foreach (var member in kvp.Value)
+                {
+                    sorted.Add(member.zipCode, member);
+                }
+                foreach (var member in sorted)
+                {
+                    Console.WriteLine(member.Value.ToString());
+
+                }
+            }
+        }
     }
 }
