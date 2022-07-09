@@ -74,6 +74,7 @@ namespace AddressBookProgram
                         Console.WriteLine("Enter 1-To Search a person through a City");
                         Console.WriteLine("Enter 2-To Search a person through a State");
                         Console.WriteLine("Enter 3-To view a person by state list or city list");
+                        Console.WriteLine("Enter 4-Sort persons by name");
                         int opt = Convert.ToInt32(Console.ReadLine());
                         switch (opt)
                         {
@@ -87,6 +88,9 @@ namespace AddressBookProgram
                             case 3:
                                 AddressBook.CountCityorState();
 
+                                break;
+                            case 4:
+                                AddressBook.SortByPersonName(addressBook);
                                 break;
                             default:
                                 Console.WriteLine("Invalid Option!");
